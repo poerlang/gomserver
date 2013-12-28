@@ -8,24 +8,24 @@ import (
 	"runtime"
 )
 
-func Defer(){
+func Defer() {
 	if r := recover(); r != nil {
 		fmt.Println("【Recovered】", r)
 	}
 	return
 }
 
-func SetCPU(){
+func SetCPU() {
 	cpu := runtime.GOMAXPROCS(runtime.NumCPU())
-	fmt.Printf("CPU num is %d \n",cpu)
+	fmt.Printf("CPU num is %d \n", cpu)
 }
 
-func SayHello(str string){
+func SayHello(str string) {
 	fmt.Println(str)
 }
 
-func CheckErr(e error){
-	if e!=nil {
+func CheckErr(e error) {
+	if e != nil {
 		fmt.Println(e)
 	}
 }
