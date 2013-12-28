@@ -10,10 +10,10 @@ import (
 )
 
 func main() {
-
+	
 	defer base.Defer()
 
-	base.SayHello("Gomo is runing.")
+	base.SayHello("gomserver is runing.")
 	base.SetCPU()
 
 	port,err := net.ResolveTCPAddr("tcp4",":7981")
