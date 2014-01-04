@@ -52,7 +52,7 @@ func handleClient(conn net.Conn) {
 		//data
 		size := binary.BigEndian.Uint16(header)
 		body := make([]byte, size)
-		fmt.Println("header:", n, " size:", size)
+		fmt.Println("bodySize:", size)
 		n, err = io.ReadFull(conn, body)
 		if err != nil {
 			log.Println("err read body:", err)

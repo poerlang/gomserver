@@ -13,7 +13,7 @@ func StartAgent(c chan []byte, conn net.Conn) {
 		if ok {
 			p := base.NewPack(data)
 			fmt.Println(p.ReadInt16()) //cmd
-			fmt.Println("a:  ", p.ReadDouble642())
+			fmt.Println("a:  ", p.ReadF32())
 			fmt.Println("b:  ", p.ReadString())
 		}
 	}

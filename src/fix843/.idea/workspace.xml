@@ -67,7 +67,7 @@
       <file leaf-file-name="main.go" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="31" selection-start="1904" selection-end="1904" vertical-scroll-proportion="0.3598201" vertical-offset="1350" max-vertical-offset="2025">
+            <state line="23" column="15" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="2025">
               <folding />
             </state>
           </provider>
@@ -118,6 +118,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -139,7 +140,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -149,12 +149,12 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.project.go" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="F:/go-lang-idea-plugin-master" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
@@ -341,16 +341,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1696" height="1026" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22234637" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3158482" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22234637" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3158482" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -358,7 +358,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -383,6 +383,10 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Go/src/pkg/syscall/ztypes_windows.go">
       <provider selected="true" editor-type-id="text-editor">
@@ -400,9 +404,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -440,9 +442,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -480,9 +480,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -520,9 +518,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -553,9 +549,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -586,9 +580,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -619,9 +611,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1685" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1685" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -673,9 +663,7 @@
     </entry>
     <entry file="file://C:/Go/src/pkg/net/net.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1685" max-vertical-offset="6405">
-          <folding />
-        </state>
+        <state line="129" column="18" selection-start="3683" selection-end="3683" vertical-scroll-proportion="0.0" vertical-offset="1685" max-vertical-offset="6405" />
       </provider>
     </entry>
     <entry file="file://C:/Go/src/pkg/net/fd_plan9.go">
@@ -702,13 +690,6 @@
         <state line="453" column="7" selection-start="14644" selection-end="14650" vertical-scroll-proportion="0.5954466" vertical-offset="6455" max-vertical-offset="18150" />
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/pkg/time/sleep.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="18" selection-start="1369" selection-end="1381" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1950">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/pkg/syscall/ztypes_windows.go">
       <provider selected="true" editor-type-id="text-editor">
         <state line="75" column="6" selection-start="1885" selection-end="1887" vertical-scroll-proportion="0.0" vertical-offset="1125" max-vertical-offset="15585">
@@ -716,9 +697,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/Go/src/pkg/time/sleep.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="5" selection-start="313" selection-end="313" vertical-scroll-proportion="0.17964073" vertical-offset="0" max-vertical-offset="1950">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="31" selection-start="1904" selection-end="1904" vertical-scroll-proportion="0.3598201" vertical-offset="1350" max-vertical-offset="2025">
+        <state line="23" column="15" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="2025">
           <folding />
         </state>
       </provider>
@@ -763,7 +751,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>go_sdk</last-edited>
+          <last-edited>1.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
