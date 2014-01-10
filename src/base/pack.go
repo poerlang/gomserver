@@ -20,44 +20,44 @@ func NewPackEmpty() *Pack {
 
 /*-------------------------------------------读取---------------------------------------------*/
 /*读取 无符号 8位整数（1字节）*/
-func (p *Pack) ReadUInt8() int {
+func (p *Pack) ReadUInt8() uint8 {
 	in := p.data[p.pos : p.pos+1]
 	p.pos = p.pos + 1
-	return int(in[0])
+	return uint8(in[0])
 }
 
 /*读取 无符号 16位整数（2字节）*/
-func (p *Pack) ReadUInt16() int {
+func (p *Pack) ReadUInt16() uint16 {
 	in := p.data[p.pos : p.pos+2]
 	result := uint16(in[1]) | (uint16(in[0]) << 8)
 	p.pos = p.pos + 2
-	return int(result)
+	return result
 }
 
 /*读取 无符号 32位整数（4字节）*/
-func (p *Pack) ReadUInt32() int {
+func (p *Pack) ReadUInt32() uint32 {
 	in := p.data[p.pos : p.pos+4]
 	result := uint32(in[3]) | (uint32(in[2]) << 8) | (uint32(in[1]) << 16) | (uint32(in[0]) << 24)
 	p.pos = p.pos + 4
-	return int(result)
+	return result
 }
 
 /*读取 有符号 8位整数（1字节）*/
-func (p *Pack) ReadInt8() int {
+func (p *Pack) ReadInt8() int8 {
 	result := p.ReadUInt8()
-	return int(result)
+	return int8(result)
 }
 
 /*读取 有符号 16位整数（2字节）*/
-func (p *Pack) ReadInt16() int {
+func (p *Pack) ReadInt16() int16 {
 	result := p.ReadUInt16()
-	return int(result)
+	return int16(result)
 }
 
 /*读取 有符号 32位整数（4字节）*/
-func (p *Pack) ReadInt32() int {
+func (p *Pack) ReadInt32() int32 {
 	result := p.ReadUInt32()
-	return int(result)
+	return int32(result)
 }
 
 /*读取 无符号 64位整数（8字节）*/
@@ -90,28 +90,28 @@ func (p *Pack) ReadF64() float64 {
 /*读取 string（string的前面嵌入32位的长度）*/
 func (p *Pack) ReadString() string {
 	strlen := p.ReadUInt16()
-	in := p.data[p.pos : p.pos+strlen]
-	p.pos = p.pos + strlen
+	in := p.data[p.pos : p.pos+int(strlen)]
+	p.pos = p.pos + int(strlen)
 	return string(in)
 }
 
 /*读取 二进制（二进制的前面包含16位的长度）*/
 func (p *Pack) ReadBytes() []byte {
 	blen := p.ReadUInt16()
-	in := p.data[p.pos : p.pos+blen]
-	p.pos = p.pos + blen
+	in := p.data[p.pos : p.pos+int(blen)]
+	p.pos = p.pos + int(blen)
 	return in
 }
 
 /*-------------------------------------------写入---------------------------------------------*/
 /*写入 无符号 8位整数（1字节）*/
-func (p *Pack) WriteUInt8(v uint) {
+func (p *Pack) WriteUInt8(v uint8) {
 	by := byte(v)
 	p.data = append(p.data, by)
 }
 
 /*写入 无符号 16位整数（2字节）*/
-func (p *Pack) WriteUInt16(v uint) {
+func (p *Pack) WriteUInt16(v uint16) {
 	by := make([]byte, 2)
 	by[1] = byte(v >> 8)
 	by[0] = byte(v)
@@ -119,7 +119,7 @@ func (p *Pack) WriteUInt16(v uint) {
 }
 
 /*写入 无符号 32位整数（4字节）*/
-func (p *Pack) WriteUInt32(v uint) {
+func (p *Pack) WriteUInt32(v uint32) {
 	by := make([]byte, 4)
 	by[3] = byte(v >> 24)
 	by[2] = byte(v >> 16)
@@ -143,18 +143,18 @@ func (p *Pack) WriteUInt64(v uint64) {
 }
 
 /*写入 有符号 8位整数（1字节）*/
-func (p *Pack) WriteInt8(v int) {
-	p.WriteUInt8(uint(v))
+func (p *Pack) WriteInt8(v int8) {
+	p.WriteUInt8(uint8(v))
 }
 
 /*写入 有符号 16位整数（2字节）*/
-func (p *Pack) WriteInt16(v int) {
-	p.WriteUInt16(uint(v))
+func (p *Pack) WriteInt16(v int16) {
+	p.WriteUInt16(uint16(v))
 }
 
 /*写入 有符号 32位整数（4字节）*/
-func (p *Pack) WriteInt32(v int) {
-	p.WriteUInt32(uint(v))
+func (p *Pack) WriteInt32(v int32) {
+	p.WriteUInt32(uint32(v))
 }
 
 /*写入 有符号 64位整数（8字节）*/
@@ -165,7 +165,7 @@ func (p *Pack) WriteInt64(v int64) {
 /*写入单精度浮点数*/
 func (p *Pack) WriteF32(f float32) {
 	by := math.Float32bits(f)
-	p.WriteUInt32(uint(by))
+	p.WriteUInt32(uint32(by))
 }
 
 /*写入双精度浮点数*/
@@ -177,13 +177,18 @@ func (p *Pack) WriteF64(f float64) {
 /*写入 String（string的前面嵌入16位的长度）*/
 func (p *Pack) WriteString(v string) {
 	by := []byte(v)
-	p.WriteUInt16(uint(len(by)))
+	p.WriteUInt16(uint16(len(by)))
 	p.data = append(p.data, by...)
 }
 
 /*写入 二进制（二进制的前面嵌入16位的长度）*/
 func (p *Pack) WriteBytes(v []byte) {
-	p.WriteUInt16(uint(len(v)))
+	p.WriteUInt16(uint16(len(v)))
+	p.data = append(p.data, v...)
+}
+
+/*写入 二进制（不写入长度）*/
+func (p *Pack) WriteRawBytes(v []byte) {
 	p.data = append(p.data, v...)
 }
 

@@ -34,11 +34,18 @@ func main() {
 }
 
 func handleClient(conn net.Conn) {
-	defer conn.Close()
-	fmt.Println(conn.RemoteAddr().String() + " in.")
-	header := make([]byte, 2)
+	fmt.Println("A Client " + conn.RemoteAddr().String() + " in.")
+
 	ch := make(chan []byte, 10)
-	go StartAgent(ch, conn)
+
+	defer func() {
+		conn.Close()
+		close(ch)
+	}()
+
+	go StartAgent(ch, conn) //接收者
+
+	header := make([]byte, 2)
 	for {
 		//header
 		n, err := io.ReadFull(conn, header)
@@ -60,5 +67,4 @@ func handleClient(conn net.Conn) {
 		}
 		ch <- body
 	}
-	close(ch)
 }
