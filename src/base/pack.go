@@ -111,34 +111,42 @@ func (p *Pack) WriteUInt8(v uint8) {
 }
 
 /*写入 无符号 16位整数（2字节）*/
+//func (p *Pack) WriteUInt16(v uint16) {
+//	by := make([]byte, 2)
+//	by[1] = byte(v >> 8)
+//	by[0] = byte(v)
+//	p.data = append(p.data, by...)
+//}
+
+/*写入 无符号 16位整数（2字节）*/
 func (p *Pack) WriteUInt16(v uint16) {
 	by := make([]byte, 2)
-	by[1] = byte(v >> 8)
-	by[0] = byte(v)
+	by[0] = byte(v >> 8)
+	by[1] = byte(v)
 	p.data = append(p.data, by...)
 }
 
 /*写入 无符号 32位整数（4字节）*/
 func (p *Pack) WriteUInt32(v uint32) {
 	by := make([]byte, 4)
-	by[3] = byte(v >> 24)
-	by[2] = byte(v >> 16)
-	by[1] = byte(v >> 8)
-	by[0] = byte(v)
+	by[0] = byte(v >> 24)
+	by[1] = byte(v >> 16)
+	by[2] = byte(v >> 8)
+	by[3] = byte(v)
 	p.data = append(p.data, by...)
 }
 
 /*写入 无符号 64位整数（8字节）*/
 func (p *Pack) WriteUInt64(v uint64) {
 	by := make([]byte, 8)
-	by[0] = byte(v >> 56)
-	by[1] = byte(v >> 48)
-	by[2] = byte(v >> 40)
-	by[3] = byte(v >> 32)
-	by[4] = byte(v >> 24)
-	by[5] = byte(v >> 16)
-	by[6] = byte(v >> 8)
-	by[7] = byte(v)
+	by[7] = byte(v >> 56)
+	by[6] = byte(v >> 48)
+	by[5] = byte(v >> 40)
+	by[4] = byte(v >> 32)
+	by[3] = byte(v >> 24)
+	by[2] = byte(v >> 16)
+	by[1] = byte(v >> 8)
+	by[0] = byte(v)
 	p.data = append(p.data, by...)
 }
 
@@ -212,7 +220,8 @@ func (p *Pack) Pos() int {
 func (p *Pack) Reset() { p.pos = 0 }
 
 /*显示 b的内部结构，以二进制的形式，如 00000000 00001111 00001000 */
-func TraceBytes(b []byte) {
+func (p *Pack) TraceBytes() {
+	b := p.Data()
 	fmt.Print("[ ")
 	for i := 0; i < len(b); i++ {
 		fmt.Printf("%08b ", b[i])

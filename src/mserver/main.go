@@ -37,13 +37,9 @@ func handleClient(conn net.Conn) {
 	fmt.Println("A Client " + conn.RemoteAddr().String() + " in.")
 
 	ch := make(chan []byte, 10)
+	quit := make(chan int)
 
-	defer func() {
-		conn.Close()
-		close(ch)
-	}()
-
-	go StartAgent(ch, conn) //接收者
+	go StartAgent(ch, conn, quit) //接收者
 
 	header := make([]byte, 2)
 	for {
@@ -67,4 +63,9 @@ func handleClient(conn net.Conn) {
 		}
 		ch <- body
 	}
+
+	//出错，关闭程序：
+	fmt.Println("与客户端断开连接")
+	quit <- 0
+	conn.Close()
 }
