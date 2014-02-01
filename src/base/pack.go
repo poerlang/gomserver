@@ -103,6 +103,13 @@ func (p *Pack) ReadBytes() []byte {
 	return in
 }
 
+/*读取 剩余的二进制（从当前pos开始）*/
+func (p *Pack) ReadBytesRemain() []byte {
+	in := p.data[p.pos:]
+	p.pos = p.Len()
+	return in
+}
+
 /*-------------------------------------------写入---------------------------------------------*/
 /*写入 无符号 8位整数（1字节）*/
 func (p *Pack) WriteUInt8(v uint8) {
