@@ -18,11 +18,10 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			c := p.ReadUInt16()     //协议号
 			f := handle.DIC[c].Func //协议号对应函数
 			fmt.Println("客户端请求协议：", c)
-			b := f(c, p) //调用函数，得到结果
-			if b != nil {
-				bb, ok := b.([]byte)
-				if ok {
-					sd <- bb //发送
+			if f != nil {
+				b := f(c, p) //调用函数，得到结果
+				if b != nil {
+					sd <- b //发送
 				}
 			}
 		case <-quit:
