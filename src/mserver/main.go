@@ -58,14 +58,12 @@ func handleClient(conn net.Conn) {
 		fmt.Println("\n\n收到客户端消息，bodySize:", size)
 		n, err = io.ReadFull(conn, body)
 		if err != nil {
-			log.Println("err read body:", err)
-			break
+			log.Println("\nerr read body:", err)
+			goto OUT
 		}
 		ch <- body
 	}
-
-	//出错，关闭程序：
-	fmt.Println("与客户端断开连接")
-	quit <- 0
-	conn.Close()
+OUT:
+	fmt.Println("\n与客户端断开连接")
+	quit <- 0 //让agent来Close链接
 }
