@@ -16,13 +16,13 @@ var CMD CmdStuct                            //以结构形式存在的协议
 
 type CmdStuct struct {
 	//moeditor struct start
-	C20000up ACMD
+	C10000up ACMD
 	//moeditor struct end
 }
 
 func init() {
 	//moeditor init start
-	CMD.C20000up = ACMD{20000, f20000Up}
+	CMD.C10000up = ACMD{10000, f10000Up}
 	//moeditor init end
 
 	//利用reflect解析结构
