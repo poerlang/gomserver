@@ -49,7 +49,7 @@ func handleClient(conn net.Conn) {
 			break
 		} else if err != nil {
 			log.Println("err read header:", err)
-			break
+			goto OUT
 		}
 
 		//data
