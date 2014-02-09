@@ -210,7 +210,7 @@ func (t *Quadtree) makeChildren() {
 				minY = t.center[1]
 				maxY = t.corner2[1]
 			}
-
+			fmt.Println("★★★★★★★MakeQuadtree")
 			t.children[x][y] = MakeQuadtree(TwoF{minX, minY},
 				TwoF{maxX, maxY},
 				t.depth+1)

@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	QuadtreeInitSize = 64
+	QuadtreeInitSize = 6400
 )
 
 type GameMap struct {

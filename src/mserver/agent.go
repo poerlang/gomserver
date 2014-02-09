@@ -25,7 +25,7 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			p := base.NewPack(data) //读取数据包裹
 			c := p.ReadUInt16()     //读取协议号
 			f := handle.DIC[c].Func //获得协议号对应函数
-			fmt.Println("客户端请求协议：", c)
+			//fmt.Println("客户端请求协议：", c)
 			if f != nil {
 				b := f(c, p, user) //调用函数，得到结果
 				if b != nil {
@@ -39,9 +39,13 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			close(quit)
 			//todo:发送断开链接的警告
 			//todo:其他清理工作
+			fmt.Println("断开用户：" + user.SID)
+			handle.MapA.Tree.Remove_WLq(user)
 			user.State = -1
 			user.Conn.Close()
+			user.Conn = nil
 			handle.RemovePlayer(user.SID)
+			user = nil
 			return
 		}
 	}
