@@ -40,6 +40,7 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			//todo:发送断开链接的警告
 			//todo:其他清理工作
 			fmt.Println("断开用户：" + user.SID)
+			//todo:告诉周围其他玩家，此user下线了。
 			handle.MapA.Tree.Remove_WLq(user)
 			user.State = -1
 			user.Conn.Close()
