@@ -6,18 +6,19 @@ import (
 )
 
 type Player struct {
-	SID      string   //String，随机字符串
-	ID       uint32   //序号
-	NickName string   //String，用户自定义名
-	State    int8     //8，状态，-1下线，0上线但尚未通过登录验证、或未初始化，1在线
-	Map      string   //String，所在地图
-	XX       float64  //横坐标
-	ZZ       float64  //纵坐标
-	YY       float64  //高度
-	Dir      float32  //方向
-	Action   uint16   //动作
-	Speed    float32  //速度
-	Conn     net.Conn //链接
+	SID      string      //String，随机字符串
+	ID       uint32      //序号
+	NickName string      //String，用户自定义名
+	State    int8        //8，状态，-1下线，0上线但尚未通过登录验证、或未初始化，1在线
+	Map      string      //String，所在地图
+	XX       float64     //横坐标
+	ZZ       float64     //纵坐标
+	YY       float64     //高度
+	Dir      float32     //方向
+	Action   uint16      //动作
+	Speed    float32     //速度
+	Conn     net.Conn    //链接
+	Sender   chan []byte //发送通道
 }
 
 func (u *Player) GetPreviousPos() *twof.TwoF { return &twof.TwoF{u.XX, u.ZZ} } // Always 0 for testing

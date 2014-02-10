@@ -29,7 +29,7 @@ func StartSender(c chan []byte, conn net.Conn) {
 				} else if e2, ok := err.(*net.OpError); ok && (e2.Temporary() || e2.Timeout()) {
 					continue
 				} else {
-					fmt.Println("网络问题")
+					fmt.Println("网络问题,剩余" + string(len(b)) + "未发送")
 					goto OUT
 				}
 			}

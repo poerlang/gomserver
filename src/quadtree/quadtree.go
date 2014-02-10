@@ -120,6 +120,9 @@ func (t *Quadtree) String_RLq() string {
 func (t *Quadtree) string2(verbose bool) string {
 	// Must not call the recursive implicit String() conversion, which would hand from read lock.
 	var str string
+	if t == nil {
+		return "程序中断，严重错误，t为空"
+	}
 	if verbose && t.objects != nil {
 		str += fmt.Sprintf("%*sobjs:", t.depth-1, "")
 		for _, o := range t.objects {
@@ -248,7 +251,8 @@ func (t *Quadtree) remove(o Object, pos *TwoF) {
 	if t.numObjects < 0 {
 		log.Println(">>>>Quadtree:remove numobjects < 0")
 		log.Printf(">>>>Pos %v, Current tree %p\n>>>>Object %#v\n>>>>Quadtree %s\n", pos, debugCurrent, o, t.string2(true))
-		log.Println(">>>>Actual position in tree:", debugCurrent.searchForObject(o).string2(true))
+		tt := debugCurrent.searchForObject(o)
+		log.Println(">>>>Actual position in tree:", tt.string2(true))
 		log.Panicln("Quadtree:remove numobjects < 0")
 	}
 

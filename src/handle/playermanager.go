@@ -33,3 +33,7 @@ func RemovePlayer(key string) {
 		delete(AllPlayers, key)
 	}
 }
+func (me *Player) SomeoneOffLine(u *Player) {
+	c := C12002Down{SID: u.SID}
+	me.Sender <- c.ToBytes()
+}

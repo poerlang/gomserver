@@ -17,6 +17,7 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 	user.SID = ""
 	user.Conn = conn
 	user.State = 0
+	user.Sender = sd
 
 	go StartSender(sd, conn) //发送者
 	for {
@@ -40,8 +41,26 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			//todo:发送断开链接的警告
 			//todo:其他清理工作
 			fmt.Println("断开用户：" + user.SID)
-			//todo:告诉周围其他玩家，此user下线了。
-			handle.MapA.Tree.Remove_WLq(user)
+
+			//告诉周围其他玩家，此user下线了。
+			fmt.Println("11")
+			near := handle.MapA.Tree.FindNearObjects_RLq(user.GetPreviousPos(), 100)
+			fmt.Println("22")
+			for _, o := range near {
+				other, ok := o.(*handle.Player)
+				fmt.Println(other.SID + " " + other.Map)
+				if !ok {
+					goto OUT
+				}
+				other.SomeoneOffLine(user)
+			}
+		OUT:
+			fmt.Println("11111111111111111111111111")
+			fmt.Println("【" + user.Map + "】" + string(len(user.Map)))
+			if user.Map == "MapA" {
+				fmt.Println("准备移除")
+				handle.MapA.Tree.Remove_WLq(user)
+			}
 			user.State = -1
 			user.Conn.Close()
 			user.Conn = nil

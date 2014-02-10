@@ -19,5 +19,5 @@ var (
 	lowerLeftNearCorner = TwoF{-QuadtreeInitSize, -QuadtreeInitSize}
 	upperLeftFarCorner  = TwoF{QuadtreeInitSize, QuadtreeInitSize}
 	playerQuadtree      = quadtree.MakeQuadtree(lowerLeftNearCorner, upperLeftFarCorner, 1)
-	MapA                = GameMap{"Map A", playerQuadtree} //地图A
+	MapA                = GameMap{"MapA", playerQuadtree} //地图A
 )
