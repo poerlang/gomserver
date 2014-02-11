@@ -40,3 +40,23 @@ func (me *Player) SomeoneOffLine(u *Player) {
 	c := C12002Down{SID: u.SID}
 	me.Sender <- c.ToBytes()
 }
+func (me *Player) SomeoneMove(u *Player) {
+	if me == u {
+		return
+	}
+	if u.State != 1 {
+		return
+	}
+	c := C12001Down{SID: u.SID}
+	c.XX = float32(u.XX)
+	c.YY = float32(u.YY)
+	c.ZZ = float32(u.ZZ)
+	c.Dir = u.Dir
+	c.Action = u.Action
+	c.Flag = 1
+	me.Sender <- c.ToBytes()
+}
+func (me *Player) SenderMsg(s string) {
+	c := C11000Down{Str: s}
+	me.Sender <- c.ToBytes()
+}

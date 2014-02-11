@@ -64,6 +64,5 @@ func handleClient(conn net.Conn) {
 		ch <- body
 	}
 OUT:
-	fmt.Println("\n与客户端断开连接")
 	quit <- 0 //让agent来Close链接
 }

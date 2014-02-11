@@ -11,6 +11,7 @@ import (
 func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 	sd := make(chan []byte, 10)
 	sd_quit := make(chan int)
+	asd_quit := make(chan int)
 
 	//new一个Player但暂时不放入AllPlayers字典,等待用户发送10000后再放入字典，
 	//字典的 key为10000传送过来的SID。
@@ -20,7 +21,9 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 	user.State = 0
 	user.Sender = sd
 
-	go StartSender(sd, conn, sd_quit, &user) //发送者
+	go StartSender(sd, conn, sd_quit, user) //发送者
+	go StartAutoSender(sd, asd_quit, user)  //自动计时器，负责定时主动推送消息到sd
+
 	for {
 		select {
 		case data := <-c:
@@ -36,13 +39,13 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			}
 		case <-quit:
 			close(quit)
-			fmt.Println("断开用户：" + user.SID)
+			fmt.Println("即将断开用户：" + user.SID)
 
 			//告诉周围其他玩家，此user下线了。
-			near := handle.MapA.Tree.FindNearObjects_RLq(user.GetPreviousPos(), 100)
+			near := handle.MapA.Tree.FindNearObjects_RLq(user.GetPreviousPos(), 1000)
 			for _, o := range near {
 				other, ok := o.(*handle.Player)
-				fmt.Println(other.SID + " " + other.Map)
+				fmt.Println(user.SID + "下线的消息，会发送给附近的用户：" + other.SID + "")
 				if !ok {
 					continue
 				}
@@ -61,6 +64,8 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			user.Conn = nil
 			handle.RemovePlayer(user.SID)
 			user = nil
+			asd_quit <- 0
+			sd_quit <- 0
 			return
 		}
 	}

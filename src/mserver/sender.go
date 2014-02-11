@@ -14,9 +14,6 @@ func StartSender(c chan []byte, conn net.Conn, sd_quit chan int, u *handle.Playe
 		select {
 		case data, ok := <-c:
 			if ok {
-				if u.State == -1 {
-					return
-				}
 				l := len(data) //长度
 				//fmt.Println("\n\t即将发给前端 ", l, " 字节")
 				p := base.NewPackEmpty() //空数据包裹
@@ -40,7 +37,11 @@ func StartSender(c chan []byte, conn net.Conn, sd_quit chan int, u *handle.Playe
 				}
 			}
 		case <-sd_quit:
+			goto OUT
 			return
 		}
 	}
+OUT:
+	close(c)
+	close(sd_quit)
 }

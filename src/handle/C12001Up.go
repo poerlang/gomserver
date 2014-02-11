@@ -25,7 +25,7 @@ func f12001Up(c uint16, p *Pack, u *Player) []byte {
 	res := new(C12001Down)
 	//业务逻辑：
 	if u.State != 1 {
-		return res.ToBytes()
+		return nil
 	}
 	u.XX = float64(s.XX)
 	u.YY = float64(s.YY)
@@ -34,6 +34,7 @@ func f12001Up(c uint16, p *Pack, u *Player) []byte {
 	u.Action = s.Action
 
 	res.Flag = 1 //可以移动
+	res.SID = u.SID
 	res.XX = s.XX
 	res.YY = s.YY
 	res.ZZ = s.ZZ

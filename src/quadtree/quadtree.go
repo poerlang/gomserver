@@ -411,14 +411,10 @@ func (t *Quadtree) findNearObjects(pos *TwoF, dist float64, objList *[]Object) {
 	if !t.hasChildren {
 		for _, o := range t.objects {
 
-			//不做距离判断 Start 取消这个判断，在叶子区域里的对象，全部都加入数组，不做距离判断
-			/**
 			// TODO: Use a squared distance instead, to save time for doing sqrt.
 			if pos.Dist(o.GetPreviousPos()) > dist {
 				continue // This object was too far away
 			}
-			**/
-			//不做距离判断 End
 
 			*objList = append(*objList, o)
 		}
