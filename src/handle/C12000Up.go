@@ -2,7 +2,7 @@ package handle
 
 import (
 	. "base"
-	"fmt"
+	//"fmt"
 	"twof"
 )
 
@@ -13,7 +13,7 @@ type C12000Up struct {
 func f12000Up(c uint16, p *Pack, u *Player) []byte {
 	s := new(C12000Up)
 	s.MapName = p.ReadString() //地图名字
-	fmt.Println(s)             //需删除，否则影响性能
+	//fmt.Println(s)             //需删除，否则影响性能
 	res := new(C12000Down)
 	//业务逻辑：
 	pos := twof.TwoF{0, 0}

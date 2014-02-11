@@ -10,6 +10,7 @@ import (
 
 func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 	sd := make(chan []byte, 10)
+	sd_quit := make(chan int)
 
 	//new一个Player但暂时不放入AllPlayers字典,等待用户发送10000后再放入字典，
 	//字典的 key为10000传送过来的SID。
@@ -19,7 +20,7 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 	user.State = 0
 	user.Sender = sd
 
-	go StartSender(sd, conn) //发送者
+	go StartSender(sd, conn, sd_quit, &user) //发送者
 	for {
 		select {
 		case data := <-c:
@@ -30,39 +31,33 @@ func StartAgent(c chan []byte, conn net.Conn, quit chan int) {
 			if f != nil {
 				b := f(c, p, user) //调用函数，得到结果
 				if b != nil {
-					pp := base.NewPackEmpty()
-					pp.WriteUInt16(c)   //写入协议号
-					pp.WriteRawBytes(b) //写入返回数据
-					sd <- pp.Data()     //发送
+					sd <- b //发送
 				}
 			}
 		case <-quit:
 			close(quit)
-			//todo:发送断开链接的警告
-			//todo:其他清理工作
 			fmt.Println("断开用户：" + user.SID)
 
 			//告诉周围其他玩家，此user下线了。
-			fmt.Println("11")
 			near := handle.MapA.Tree.FindNearObjects_RLq(user.GetPreviousPos(), 100)
-			fmt.Println("22")
 			for _, o := range near {
 				other, ok := o.(*handle.Player)
 				fmt.Println(other.SID + " " + other.Map)
 				if !ok {
-					goto OUT
+					continue
 				}
 				other.SomeoneOffLine(user)
 			}
-		OUT:
-			fmt.Println("11111111111111111111111111")
-			fmt.Println("【" + user.Map + "】" + string(len(user.Map)))
+			//从地图中移除此玩家
 			if user.Map == "MapA" {
-				fmt.Println("准备移除")
 				handle.MapA.Tree.Remove_WLq(user)
 			}
+
+			//todo:其他清理工作
+
 			user.State = -1
 			user.Conn.Close()
+			fmt.Println("用户【" + user.SID + "】已断开")
 			user.Conn = nil
 			handle.RemovePlayer(user.SID)
 			user = nil

@@ -34,6 +34,9 @@ func RemovePlayer(key string) {
 	}
 }
 func (me *Player) SomeoneOffLine(u *Player) {
+	if me == u {
+		return
+	}
 	c := C12002Down{SID: u.SID}
 	me.Sender <- c.ToBytes()
 }

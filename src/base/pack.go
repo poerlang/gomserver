@@ -235,3 +235,10 @@ func (p *Pack) TraceBytes() {
 	}
 	fmt.Print("]")
 }
+func TraceBytes2(b []byte) {
+	fmt.Print("[ ")
+	for i := 0; i < len(b); i++ {
+		fmt.Printf("%08b ", b[i])
+	}
+	fmt.Print("]")
+}
