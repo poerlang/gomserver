@@ -14,14 +14,7 @@ func StartAutoSender(sd chan []byte, asd_quit chan int, u *handle.Player) {
 	for {
 		select {
 		case <-tiker.C:
-			nears := handle.MapA.Tree.FindNearObjects_RLq(u.GetPreviousPos(), 1000)
-			for _, o := range nears {
-				other, ok := o.(*handle.Player)
-				if !ok {
-					continue
-				}
-				other.SomeoneMove(u)
-			}
+			//todo:.......
 		case <-asd_quit:
 			close(asd_quit)
 			return

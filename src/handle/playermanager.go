@@ -53,7 +53,6 @@ func (me *Player) SomeoneMove(u *Player) {
 	c.ZZ = float32(u.ZZ)
 	c.Dir = u.Dir
 	c.Action = u.Action
-	c.Flag = 1
 	me.Sender <- c.ToBytes()
 }
 func (me *Player) SenderMsg(s string) {

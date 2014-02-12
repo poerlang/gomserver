@@ -2,7 +2,7 @@ package handle
 
 import (
 	. "base"
-	"fmt"
+	//"fmt"
 	. "twof"
 )
 
@@ -21,8 +21,6 @@ func f12001Up(c uint16, p *Pack, u *Player) []byte {
 	s.YY = p.ReadF32()        //高度
 	s.Dir = p.ReadF32()       //方向
 	s.Action = p.ReadUInt16() //动作（静止、走路、奔跑、跑跳、原地跳、左横移、右横移、退后、退跑、攻击1、攻击2等等）
-	//fmt.Println(s)            //需删除，否则影响性能
-	res := new(C12001Down)
 	//业务逻辑：
 	if u.State != 1 {
 		return nil
@@ -33,16 +31,17 @@ func f12001Up(c uint16, p *Pack, u *Player) []byte {
 	u.Dir = s.Dir
 	u.Action = s.Action
 
-	res.Flag = 1 //可以移动
-	res.SID = u.SID
-	res.XX = s.XX
-	res.YY = s.YY
-	res.ZZ = s.ZZ
-	res.Dir = s.Dir
-	res.Action = s.Action
-	xz := &TwoF{float64(s.XX), float64(s.ZZ)}
+	xz := &TwoF{float64(u.XX), float64(u.ZZ)}
 	MapA.Tree.Move_WLq(u, xz)
-	fmt.Println("===================================================")
-	fmt.Println(MapA.Tree.String_RLq())
-	return res.ToBytes()
+
+	//通知周围其他玩家
+	nears := MapA.Tree.FindNearObjects_RLq(xz, 1000)
+	for _, o := range nears {
+		other, ok := o.(*Player)
+		if !ok {
+			continue
+		}
+		other.SomeoneMove(u)
+	}
+	return nil //不需要回传消息给玩家自己
 }
