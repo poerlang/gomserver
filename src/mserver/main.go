@@ -6,13 +6,38 @@ package main
 import (
 	"base"
 	"encoding/binary"
+	"flag"
 	"fmt"
+	"os"
+	"os/exec"
+	//"handle"
 	"io"
 	"log"
 	"net"
+	"path/filepath"
+)
+
+const (
+	TGW_HEADER_SIZE      = 1024 * 4
+	TGW_HEADER_SEG_COUNT = 3
 )
 
 func main() {
+	flag.Parse()
+	//守护进程，开始
+	d := flag.Bool("d", false, "Whether or not to launch in the background(like a daemon)")
+	if *d {
+		fmt.Println(os.Args[0] + " will run in background.")
+		filePath, _ := filepath.Abs(os.Args[0]) //将命令行参数中执行文件路径转换成可用路径
+		cmd := exec.Command(filePath, os.Args[2:]...)
+		//将其他命令传入生成出的进程
+		cmd.Stdin = os.Stdin //给新进程设置文件描述符，可以重定向到文件中
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Start() //开始执行新进程，不等待新进程退出
+		return
+	}
+	//守护进程，结束
 
 	defer base.Defer()
 
@@ -29,10 +54,34 @@ func main() {
 		if err != nil {
 			continue
 		}
-		go handleClient(conn)
+		go waitTGW(conn)
 	}
 }
-
+func waitTGW(conn net.Conn) {
+	//tgw_l7_forward，处理
+	buffer := make([]byte, TGW_HEADER_SIZE)
+	length, err := conn.Read(buffer)
+	if err != nil {
+		log.Printf("read from client failed:%s", err.Error())
+		return
+	}
+	segCount := 0
+	var tgw []byte
+	for i := 1; i < length; i++ {
+		if buffer[i] == '\n' && buffer[i-1] == '\r' {
+			segCount++
+			if segCount == TGW_HEADER_SEG_COUNT {
+				tgw = buffer[0 : i+1]
+				buffer = buffer[i+1 : length]
+				break
+			}
+		}
+	}
+	fmt.Println(string(tgw))
+	fmt.Println("first pack after tgw (will pass):")
+	base.TraceBytes2(buffer)
+	go handleClient(conn)
+}
 func handleClient(conn net.Conn) {
 	fmt.Println("A Client " + conn.RemoteAddr().String() + " in.")
 
@@ -55,12 +104,14 @@ func handleClient(conn net.Conn) {
 		//data
 		size := binary.BigEndian.Uint16(header)
 		body := make([]byte, size)
-		//fmt.Println("\n\n收到客户端消息，bodySize:", size)
+		//fmt.Println("\n\nheader info :", size)
 		n, err = io.ReadFull(conn, body)
 		if err != nil {
 			log.Println("\nerr read body:", err)
 			goto OUT
 		}
+		//base.TraceBytes2(body)
+
 		ch <- body
 	}
 OUT:
